@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+   font-family: "Akshar", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+header{
+    text-align: center;
+    background-image: linear-gradient(rgb(144, 144, 255), rgb(255, 255, 255));
+}
+
+h1{
+    padding: 3vh;
+}
+
+.search-container{
+    display: flex;
+    justify-content: center;
+}
+
+.searchbarh2 {
+    margin: 1.5vh;
+    text-align: center;
+}
+
+.fiveday{
+    margin-left: 2vh;
+}
+
+.forecast-grid{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.forecast-card {
+    display:grid;
+    background-color:rgb(104, 104, 193);
+    color:rgb(0, 0, 0);
+    height: 15rem;
+    width: auto;
+    margin: auto;
+    background-image: linear-gradient(rgb(104,104,193), rgb(255,255,255));
+    border-radius: 10px;
+    margin: 1vh;
+
+}
+
+.card-body{
+    text-align: left;
+    margin: 2vh;
+}
+
+.date {
+    margin-top: 2vh;
+}
+
+.local-forecast {
+    margin: 3vh;
+    border: 5px;
+    border-color: black;
+    
+}
