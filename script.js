@@ -1,3 +1,8 @@
+//placeholder for the blank space the search is entered and the data comes up
+//use local storage to create a city search history that be visible as buttons in the header or footer
+//responsive css
+//
+
 
 var searchButton = document.querySelector(".searchbutton");
 
@@ -16,7 +21,7 @@ function getWeather(city) {
             getForecast(lat, lon);
             document.querySelector(".city-name").textContent = data.name;
             document.querySelector(".temp").textContent = "Temp: " + data.main.temp + "F";
-            document.querySelector(".wind").textContent = "Wind: " + data.wind.speed + "MPH"; //this is undefined
+            document.querySelector(".wind").textContent = "Wind: " + data.wind.speed + "MPH"; 
             document.querySelector(".humidity").textContent = "Humidity: " + data.main.humidity + "%";
         })
 }
@@ -66,8 +71,32 @@ searchButton.addEventListener("click", function (event) {
     // if (event.target && event.target.matches(".city")){
     //     //call function for fetching weather
     // }
+    document.querySelector(".local-forecast").classList.remove("hidden");
+    document.querySelector(".forecast-grid").classList.remove("hidden");
+    //use above line to hide introduction message 
     var cityName = document.querySelector(".search").value
-    console.log(cityName);
     getWeather(cityName);
+
+    //                          ["Boston"]
+    const array = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    
+    array.push(cityName);
+    // array: ["Boston", "Chicago"]
+
+    localStorage.setItem("searchHistory", JSON.stringify(array));
+
+});
+
+var searchBar = document.querySelector(".searchbar");
+
+function renderCityHistory(){
+    var cityHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    // cityHistory: ["Boston", "Chicago"]
+    for (i = 0; i < cityHistory.length; i++){
+        var cityButton = document.createElement("button");
+        cityButton.setAttribute("class", "city-btn"); 
+        cityButton.textContent(cityHistory[i]);
+        searchBar.appendChild(cityButton);
+        //add event listener within loop for each button
+    }
 }
-)    
