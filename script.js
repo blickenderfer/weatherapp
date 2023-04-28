@@ -1,9 +1,3 @@
-//placeholder for the blank space the search is entered and the data comes up
-//use local storage to create a city search history that be visible as buttons in the header or footer
-//responsive css
-//
-
-
 var searchButton = document.querySelector(".searchbutton");
 
 
@@ -43,13 +37,27 @@ function getForecast(lat, lon) {
                     var cardBody = document.createElement("div")
                     var date = document.createElement("h5")
                     date.textContent = element.dt_txt.split(" ")[0]
-                    cardBody.append(date); //add weather conditions to this 
+                    cardBody.append(date);
                     forecastCard.append(cardBody);
-                    document.querySelector(".forecast-grid").append(forecastCard); //data.list[0].main.temp
+                    
+                    document.querySelector(".forecast-grid").append(forecastCard); 
                     console.log(data.list[0].main.temp);
+                    
                     var temp = document.createElement("p");
                     temp.textContent = data.list[i].main.temp;
                     cardBody.append(temp);
+
+                    var wind = document.createElement("p");
+                    wind.textContent = data.list[i].wind.speed;
+                    cardBody.append(wind);
+
+                    var humidity = document.createElement("p");
+                    humidity.textContent = data.list[i].main.humidity;
+                    cardBody.append(humidity);
+
+                    var icon = document.createElement("img");
+                    Image.source = data.list[i].weather.icon; //attemping to grab the appropriate weather icon
+                
                 }
             }
 
@@ -57,31 +65,20 @@ function getForecast(lat, lon) {
 
 }
 
-//when creating search history, create new button with previously searched city
-
-//event listener for search button
-//take value from input 
-//call first function for fetching weather
-//get localstorage item and push the item from the input 
 
 //event listener, target will match class of city, 
 //call first function to pass the city name 
 searchButton.addEventListener("click", function (event) {
     event.preventDefault()
-    // if (event.target && event.target.matches(".city")){
-    //     //call function for fetching weather
-    // }
     document.querySelector(".local-forecast").classList.remove("hidden");
     document.querySelector(".forecast-grid").classList.remove("hidden");
     //use above line to hide introduction message 
     var cityName = document.querySelector(".search").value
     getWeather(cityName);
 
-    //                          ["Boston"]
     const array = JSON.parse(localStorage.getItem("searchHistory")) || [];
     
     array.push(cityName);
-    // array: ["Boston", "Chicago"]
 
     localStorage.setItem("searchHistory", JSON.stringify(array));
 
@@ -91,7 +88,6 @@ var searchBar = document.querySelector(".searchbar");
 
 function renderCityHistory(){
     var cityHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    // cityHistory: ["Boston", "Chicago"]
     for (i = 0; i < cityHistory.length; i++){
         var cityButton = document.createElement("button");
         cityButton.setAttribute("class", "city-btn"); 

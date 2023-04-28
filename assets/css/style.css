@@ -7,11 +7,12 @@
 
 header{
     text-align: center;
-    background-image: linear-gradient(rgb(144, 144, 255), rgb(255, 255, 255));
+    /* font-weight: bold; bold not working here */
 }
 
 h1{
     padding: 3vh;
+;
 }
 
 .search-container{
@@ -24,8 +25,11 @@ h1{
     text-align: center;
 }
 
-.city-Btn {
-    
+.local-forecast {
+    background-color: rgb(81, 108, 241);
+    text-align: center;
+    color: black;
+    border-radius: 10px;
 }
 
 .fiveday{
@@ -43,7 +47,7 @@ h1{
     background-color:rgb(104, 104, 193);
     color:rgb(0, 0, 0);
     height: 15rem;
-    width: auto;
+    width: 10rem;
     margin: auto;
     background-image: linear-gradient(rgb(104,104,193), rgb(255,255,255));
     border-radius: 10px;
