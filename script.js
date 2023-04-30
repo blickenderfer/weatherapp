@@ -4,6 +4,8 @@ var searchButton = document.querySelector(".searchbutton");
 var key = `d683b62b0b9c10152093f231d0b476d6`
 
 function getWeather(city) {
+    document.querySelector(".local-forecast").classList.remove("hidden");
+    document.querySelector(".forecast-grid").classList.remove("hidden");
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`)
         .then(function (response) {
             return response.json();
@@ -12,11 +14,14 @@ function getWeather(city) {
             console.log(data);
             var lat = data.coord.lat;
             var lon = data.coord.lon;
+            var pic = data.weather[0].icon; 
             getForecast(lat, lon);
             document.querySelector(".city-name").textContent = data.name;
             document.querySelector(".temp").textContent = "Temp: " + data.main.temp + "F";
             document.querySelector(".wind").textContent = "Wind: " + data.wind.speed + "MPH"; 
             document.querySelector(".humidity").textContent = "Humidity: " + data.main.humidity + "%";
+            document.querySelector("#weather-icon").setAttribute("src", `http://openweathermap.org/img/wn/${pic}@2x.png`); 
+    
         })
 }
 
@@ -36,6 +41,7 @@ function getForecast(lat, lon) {
                     forecastCard.setAttribute("class", "forecast-card")
                     var cardBody = document.createElement("div")
                     var date = document.createElement("h5")
+                    var pic = data.list[i].weather[0].icon; 
                     date.textContent = element.dt_txt.split(" ")[0]
                     cardBody.append(date);
                     forecastCard.append(cardBody);
@@ -56,8 +62,8 @@ function getForecast(lat, lon) {
                     cardBody.append(humidity);
 
                     var icon = document.createElement("img");
-                    Image.source = data.list[i].weather.icon; //attemping to grab the appropriate weather icon
-                
+                    icon.setAttribute("src", `http://openweathermap.org/img/wn/${pic}@2x.png`);
+                    cardBody.append(icon);
                 }
             }
 
@@ -68,18 +74,17 @@ function getForecast(lat, lon) {
 
 //event listener, target will match class of city, 
 //call first function to pass the city name 
-searchButton.addEventListener("click", function (event) {
-    event.preventDefault()
-    document.querySelector(".local-forecast").classList.remove("hidden");
-    document.querySelector(".forecast-grid").classList.remove("hidden");
+searchButton.addEventListener("click", function() {
+    // event.preventDefault()
+    // document.querySelector(".local-forecast").classList.remove("hidden");
+    // document.querySelector(".forecast-grid").classList.remove("hidden");
     //use above line to hide introduction message 
     var cityName = document.querySelector(".search").value
     getWeather(cityName);
-
     const array = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    
-    array.push(cityName);
-
+    if (!array.includes(cityName)){
+        array.push(cityName);
+    }
     localStorage.setItem("searchHistory", JSON.stringify(array));
 
 });
@@ -88,11 +93,16 @@ var searchBar = document.querySelector(".searchbar");
 
 function renderCityHistory(){
     var cityHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    console.log(cityHistory);
     for (i = 0; i < cityHistory.length; i++){
         var cityButton = document.createElement("button");
         cityButton.setAttribute("class", "city-btn"); 
-        cityButton.textContent(cityHistory[i]);
+        cityButton.textContent = cityHistory[i];
+        cityButton.setAttribute("onclick", `getWeather('${cityHistory[i]}')`);
+        // cityButton.addEventListener("click", getWeather(cityHistory[i]));
         searchBar.appendChild(cityButton);
-        //add event listener within loop for each button
+        
     }
 }
+
+renderCityHistory();
