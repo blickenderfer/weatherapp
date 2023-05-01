@@ -1,21 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
-   font-family: "Akshar", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Akshar", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 
-header{
+header {
     text-align: center;
-    /* font-weight: bold; bold not working here */
+
 }
 
-h1{
+.title {
     padding: 3vh;
-;
+    font-weight: bold;
 }
 
-.search-container{
+.searchbarh2 {
+    font-size: 2rem;
+}
+
+.search-container {
     display: flex;
     justify-content: center;
 }
@@ -25,6 +29,10 @@ h1{
     text-align: center;
 }
 
+.city-name {
+    background-color: none;
+}
+
 .local-forecast {
     background-color: rgb(81, 108, 241);
     text-align: center;
@@ -32,30 +40,29 @@ h1{
     border-radius: 10px;
 }
 
-.fiveday{
+.fiveday {
     margin-left: 2vh;
 }
 
-.forecast-grid{
+.forecast-grid {
     display: flex;
     justify-content: center;
     flex-direction: row;
 }
 
 .forecast-card {
-    display:grid;
-    background-color:rgb(104, 104, 193);
-    color:rgb(0, 0, 0);
+    background-color: rgb(104, 104, 193);
+    color: rgb(0, 0, 0);
     height: 15rem;
     width: 10rem;
     margin: auto;
-    background-image: linear-gradient(rgb(104,104,193), rgb(255,255,255));
+    background-image: linear-gradient(rgb(104, 104, 193), rgb(255, 255, 255));
     border-radius: 10px;
     margin: 1vh;
 
 }
 
-.card-body{
+.card-body {
     text-align: left;
     margin: 2vh;
 }
@@ -68,9 +75,16 @@ h1{
     margin: 3vh;
     border: 5px;
     border-color: black;
-    
+
 }
 
-.hidden{
+.hidden {
     display: none;
+}
+
+.city-btn {
+    display: inline-grid;
+    margin: 1vh;
+    padding: 1vh;
+    
 }
